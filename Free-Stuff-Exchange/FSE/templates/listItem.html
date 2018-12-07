@@ -1,0 +1,77 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Inventory
+{% endblock %}
+
+<!-- {% block header %}
+<div class="alert alert-primary border text-center" role="alert">
+Bought!
+</div>
+{% endblock %} -->
+
+{% block main %}
+<main class="container p-5">
+
+
+    <table class="table table-striped" id="myTable">
+        <thead>
+            <h3>All Items available for exchange</h3>
+            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for item name in inventory">
+
+            <tr>
+
+                <th width="10%">Item Type</th>
+                <th width="10%">Item Name</th>
+                <th width="35%">Item Desc</th>
+                <th width="50%">Item Image</th>
+                <th>Contact owner</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in range(inventory|count) %}
+                <tr>
+
+                    <td >{{ inventory[i]["itemTypeId"] }}</td>
+                    <td >{{ inventory[i]["itemName"] }}</td>
+                    <td width="300px">{{ inventory[i]["itemDesc"] }}</td>
+
+                    <td>
+                        <img src="./static/Uploaded_images/{{ inventory[i]["itemImage"] }}">
+                    </td>
+
+                    <td>
+                        <form>
+                            <input class="btn btn-primary" type="button" value="Contact" onClick="parent.location='mailto:{{ inventory[i]["username"] }}?subject=Inquiry about trading item via Free Stuff Exchange'">
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <!--W3Schools-->
+    <script>
+    function myFunction() {
+      // Declare variables
+      var input, filter, table, tr, td, i, txtValue;
+      input = document.getElementById("myInput");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("myTable");
+      tr = table.getElementsByTagName("tr");
+
+      // Loop through all table rows, and hide those who don't match the search query
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[1];
+        if (td) {
+          txtValue = td.textContent || td.innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }
+      }
+    }
+    </script>
+</main>
+{% endblock %}

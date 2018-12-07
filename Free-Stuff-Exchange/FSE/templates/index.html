@@ -1,0 +1,85 @@
+{% extends "layout.html" %}
+
+{% block title %}
+
+{% endblock %}
+
+<!-- {% block header %}
+<div class="alert alert-primary border text-center" role="alert">
+Bought!
+</div>
+{% endblock %} -->
+
+{% block main %}
+<main class="container p-5">
+    <table class="table table-striped">
+        <thead>
+            <h3>Items in Your Inventory</h3>
+            <tr>
+                <th width="15%">Item Name</th>
+                <th width="15%">Item Type</th>
+                <th width="30%">Item Description</th>
+                <th width="50%">Item Image</th>
+                <th>Delete</th>
+
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for i in range(inventory|count) %}
+                <tr>
+                    <td>{{ inventory[i]["itemName"] }}</td>
+                    <td>{{ inventory[i]["itemTypeId"] }}</td>
+                    <td>{{ inventory[i]["itemDesc"] }}</td>
+
+                    <td>
+                        <img src="./static/Uploaded_images/{{ inventory[i]["itemImage"] }}">
+                    </td>
+
+                    <td>
+                        <form action="/deleteInventory" method="post">
+                            <button class="btn btn-primary" type="submit" value="{{ inventory[i]["itemId"] }}" name = "itemId">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+    <br>
+    <br>
+    <table class="table table-striped">
+        <thead>
+            <h3>Item Types You are Searching for</h3>
+            <tr>
+                <th>Item Type</th>
+                <th>Delete</th>
+
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for k in range(lookFor|count) %}
+                <tr>
+                    <td>{{ lookFor[k]["itemLookFor"] }}</td>
+                    <td>
+                    <form action="/deleteLookFor" method="post">
+                        <input type="hidden" name="itemLookFor" value="{{ lookFor[k]["itemLookFor"] }}"/>
+                        <button class="btn btn-primary" type="submit" value="{{ lookFor[k]["userId"] }}" name = "userId">Delete</button>
+                    </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <form>
+        <input class="btn btn-primary" type="button" value="Contact Us" onClick="parent.location='mailto:dow@college.harvard.edu?subject=Inquiry about item type, site performance, etc.'">
+    </form>
+
+
+
+
+
+</main>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Matches
+{% endblock %}
+
+<!-- {% block header %}
+<div class="alert alert-primary border text-center" role="alert">
+Bought!
+</div>
+{% endblock %} -->
+
+{% block main %}
+<main class="container p-5">
+    <br>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th width="10%">Item Type</th>
+                <th width="10%">Item Name</th>
+                <th width="35%">Item Desc</th>
+                <th width="50%">Item Image</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in range(inventory_match|count) %}
+                <tr>
+                    <td colspan="0">{{ inventory_match[i]["itemTypeId"] }}</td>
+                    <td colspan="0">{{ inventory_match[i]["itemName"] }}</td>
+                    <td colspan="0">{{ inventory_match[i]["itemDesc"] }}</td>
+                    <td>
+                        <img src="./static/Uploaded_images/{{ inventory_match[i]["itemImage"] }}">
+                    </td>
+                    <td>
+                        <form>
+                            <input class="btn btn-primary" type="button" value="Contact Owner" onClick="parent.location='mailto:{{ inventory_match[i]["ownerId"] }}?subject=Inquiry about trading item via Free Stuff Exchange'">
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</main>
+{% endblock %}
