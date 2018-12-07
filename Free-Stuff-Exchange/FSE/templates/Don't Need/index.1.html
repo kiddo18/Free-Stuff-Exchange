@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Log In
+{% endblock %}
+
+<!-- {% block header %}
+<div class="alert alert-primary border text-center" role="alert">
+Bought!
+</div>
+{% endblock %} -->
+
+{% block main %}
+<main class="container p-5">
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Name</th>
+                <th>Shares</th>
+                <th>Price</th>
+                <th>TOTAL</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <!-- stock values go in this table -->
+            {% for i in range(stocks|count) %}
+                <tr>
+                    <td colspan="0">{{ stocks[i]["symbol"] }}</td>
+                    <td colspan="0">{{ stocks[i]["name"] }}</td>
+                    <td colspan="0">{{ stocks[i]["SUM(shares)"] }}</td>
+                    <td colspan="0">{{ stocks[i]["price"] }}</td>
+                    <td colspan="0">{{ stocks[i]["total"] }}</td>
+                    <!-- <td colspan="4">${{ cash + (stocks[i] | sum(attribute='total')) }}</td> -->
+                </tr>
+            {% endfor %}
+            <tr>
+                <td colspan="0">CASH</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td colspan="4">${{ cash + stocks | sum(attribute='total') }}</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4"></td>
+                <td>{{ cash }}</td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <p>{{ stocks[0] }}</p>
+
+</main>
+{% endblock %}

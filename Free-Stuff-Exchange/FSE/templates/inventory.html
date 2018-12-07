@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Add
+{% endblock %}
+
+{% block main %}
+<main class="container p-5">
+
+    <form action="/inventory" method="post" enctype=multipart/form-data>
+        <h5>Item Type</h5>
+        <div class="form-group">
+            <select class="form-control" name="itemTypeId">
+                <option disabled selected value="">Enter Item Type</option>
+                    {% for i in range(Items|count) %}
+                        <option value="{{ Items[i]["itemTypeId"] }}">{{ Items[i]["itemTypeName"] }}</option>
+                    {% endfor %}
+            </select>
+        </div>
+
+        <h5>Name</h5>
+        <div class="form-group">
+            <textarea autocomplete="off" autofocus class="form-control" name="itemName" placeholder="Enter Item Name" type="text"></textarea>
+        </div>
+
+        <h5>Description</h5>
+        <div class="form-group">
+            <textarea autocomplete="off" autofocus class="form-control" name="itemDesc" placeholder="Enter Item Description" type="text"cols="100" rows="5"></textarea>
+        </div>
+
+        <h5>Item Image</h5>
+        <div>
+            <input type=file name=file>
+        </div>
+        <br>
+        <button class="btn btn-primary" type="submit">Register Item</button>
+    </form>
+
+</main>
+
+{% endblock %}

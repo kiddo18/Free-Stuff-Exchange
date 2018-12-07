@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Look For
+{% endblock %}
+
+{% block main %}
+<main class="container p-5">
+
+    <form action="/lookFor" method="post">
+        <div class="form-group">
+            <select class="form-control" name="itemTypeId">
+                <option disabled selected value=""></option>
+                    {% for i in range(Items|count) %}
+                        <option value="{{ Items[i]["itemTypeId"] }}">{{ Items[i]["itemTypeName"] }}</option>
+                    {% endfor %}
+            </select>
+        </div>
+        <button class="btn btn-primary" type="submit">Look for this Item Type</button>
+    </form>
+
+</main>
+
+{% endblock %}
